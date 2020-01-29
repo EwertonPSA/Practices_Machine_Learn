@@ -92,7 +92,7 @@ y = np.c_[country_stats["Life satisfaction"]]
 #Definindo informacoes da plotagem
 #o kind define o tipo formatacao das informacoes na plotagem
 #kind pode ser igual a line e os pontos serao interligados por exemplo
-#mais exemplos em 
+#mais exemplos em http://queirozf.com/entries/pandas-dataframe-plot-examples-with-matplotlib-pyplot
 country_stats.plot(kind='scatter', x="GDP per capita", y='Life satisfaction')
 plt.show()
 
