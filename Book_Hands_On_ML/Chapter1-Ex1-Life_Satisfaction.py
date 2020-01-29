@@ -59,7 +59,7 @@ def prepare_country_stats(oecd_bli, gdp_per_capita):
     keep_indices = list(set(range(36)) - set(remove_indices))
     return full_country_stats[["GDP per capita", 'Life satisfaction']].iloc[keep_indices]
 
-datapath = os.path.join("datasets", "lifesat", "") #Caminho dos dados
+datapath = os.path.join( "dataset", "lifesat", "") #Caminho dos dados
 
 oecd_bli = pd.read_csv(datapath + "oecd_bli_2015.csv", thousands=',')
 gdp_per_capita = pd.read_csv(datapath + "gdp_per_capita.csv", thousands=',', 
@@ -79,9 +79,7 @@ print (y)
 country_stats.plot(kind='scatter', x="GDP per capita", y='Life satisfaction')
 plt.show()
 
-
 model = sklearn.linear_model.LinearRegression()
-
 
 model.fit(X,y)
 
