@@ -1,4 +1,4 @@
-# Praticas em Machine Learn 
+# Práticas em Machine Learn 
 Os códigos elaborados foram baseado no livro Hands On Machine Learning with Scikit Learn and TensorFlow, nos códigos são incluido comentários para auxiliar o estudo e a compreensão.
 Além disso, alguns códigos serão alterados para compreensão e prática da linguagem python, os gráficos plotados estarão no repositório ./Images/ mas serão incluidos no README.md também com uma breve explicação
 
