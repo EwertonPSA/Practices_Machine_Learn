@@ -4,7 +4,7 @@ Além disso, alguns códigos serão alterados para compreensão e prática da li
 
 [](https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/life%20satisfaction%20vs%20GDP.png=)
 
-## Chapter 1 - Ex1
+## Chapter 1 - Ex1 (PLOT E CODIGO ALTERADO)
 No gráfico é possivel ver o impacto do valor K no algorítimo de treinamento KNN. Além disso, inclui o modelo com regressão linear para comparar os diferentes modelos. Esse gráfico foi gerado pelo codigo Chapter1-Ex1-Life_Satisfaction.py e as partes importantes que devem ser observada no codigo: salvar imagem, leitura dos dados .csv e como foi plotado os dados. 
 
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/life%20satisfaction%20vs%20GDP.png" width="500" height="300" />
