@@ -30,14 +30,12 @@ mpl.rc('ytick', labelsize=12)#tamanho dos valores q vao na legenda da coordenada
 
 #Local em que sera salvo as figuras
 PROJECT_ROOT_DIR = "."
-CHAPTER_ID = "fundamentals"
-
 
 def save_fig(fig_id, tight_layout = True):
     #os.path.join->Definindo diretorio, em cada ',' 
     #nos parametros sera incluido '/' para definir o diretorio
     #Onde sera salvo as imagens
-    path = os.path.join(PROJECT_ROOT_DIR, "images", CHAPTER_ID, fig_id + ".png")
+    path = os.path.join(PROJECT_ROOT_DIR, "Images", fig_id + ".png")
     print("Saving figure", fig_id)
     if(tight_layout):
         #Utilizado para redimensionar os objetos de um subplot 
@@ -93,12 +91,33 @@ y = np.c_[country_stats["Life satisfaction"]]
 #o kind define o tipo formatacao das informacoes na plotagem
 #kind pode ser igual a line e os pontos serao interligados por exemplo
 #mais exemplos em 
-country_stats.plot(kind='scatter', x="GDP per capita", y='Life satisfaction')
-plt.show()
+#country_stats.plot(kind='scatter', x="GDP per capita", y='Life satisfaction')
+#plt.show()
 
+#Cria um modelo utilizando regressao linear
 model = sklearn.linear_model.LinearRegression()
 
+#Treina o modelo a partir do conjunto de dados
 model.fit(X,y)
 
-X_new = [[22587]]
-print(model.predict(X_new))
+#X_New representa um valor que sera usado para tentar predizer utilizando o modelo
+#X_new = [[22587]]
+#print(model.predict(X_new))
+
+from sklearn.neighbors import KNeighborsRegressor
+modelKNN3= sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
+modelKNN3.fit(X,y)
+
+modelKNN1= sklearn.neighbors.KNeighborsRegressor(n_neighbors=1)
+modelKNN1.fit(X,y)
+
+plt.scatter(X, y, label='Dataset' ,color='blue')
+plt.plot(X, model.predict(X), linestyle='-', label='Model Linear Regression', color='red')
+plt.plot(X, modelKNN3.predict(X), linestyle='--', label='Model KNN(k=3)', color='green', linewidth=4)
+plt.plot(X, modelKNN1.predict(X), linestyle='-.', label='Model KNN(k=1)', color='black')
+plt.legend()#ativa a legenda
+plt.grid(True)
+plt.title('Dataset and Models training of life satisfaction vs GDP')
+save_fig("life satisfaction vs GDP")
+plt.show()
+
