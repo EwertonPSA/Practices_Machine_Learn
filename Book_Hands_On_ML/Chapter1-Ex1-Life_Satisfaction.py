@@ -104,7 +104,10 @@ model.fit(X,y)
 #X_new = [[22587]]
 #print(model.predict(X_new))
 
+#IMPORTANTE PARA APLICAR OS MODELOS
 from sklearn.neighbors import KNeighborsRegressor
+
+
 modelKNN3= sklearn.neighbors.KNeighborsRegressor(n_neighbors=3)
 modelKNN3.fit(X,y)
 
