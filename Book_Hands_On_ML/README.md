@@ -4,4 +4,4 @@ Além disso, alguns códigos serão alterados para compreensão e prática da li
 
 ..![](https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/life%20satisfaction%20vs%20GDP.png=)
 
-<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/life%20satisfaction%20vs%20GDP.png" width="300" height="300" />
+<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/life%20satisfaction%20vs%20GDP.png" width="300" height="500" />
