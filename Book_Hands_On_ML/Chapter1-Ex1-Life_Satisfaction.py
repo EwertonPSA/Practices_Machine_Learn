@@ -121,6 +121,8 @@ plt.plot(X, modelKNN1.predict(X), linestyle='-.', label='Model KNN(k=1)', color=
 plt.legend()#ativa a legenda
 plt.grid(True)
 plt.title('Dataset and Models training of life satisfaction vs GDP')
+plt.xlabel("GDP per capita")
+plt.ylabel("Life satisfaction")
 save_fig("life satisfaction vs GDP")
 plt.show()
 
