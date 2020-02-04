@@ -30,12 +30,13 @@ mpl.rc('ytick', labelsize=12)#tamanho dos valores q vao na legenda da coordenada
 
 #Local em que sera salvo as figuras
 PROJECT_ROOT_DIR = "."
+CHAPTER_ID = "Chapter1_Fundamentals"
 
 def save_fig(fig_id, tight_layout = True):
     #os.path.join->Definindo diretorio, em cada ',' 
     #nos parametros sera incluido '/' para definir o diretorio
     #Onde sera salvo as imagens
-    path = os.path.join(PROJECT_ROOT_DIR, "Images", fig_id + ".png")
+    path = os.path.join(PROJECT_ROOT_DIR, "Images", CHAPTER_ID, fig_id + ".png")
     print("Saving figure", fig_id)
     if(tight_layout):
         #Utilizado para redimensionar os objetos de um subplot 
