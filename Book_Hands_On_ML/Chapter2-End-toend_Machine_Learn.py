@@ -3,28 +3,30 @@ import tarfile
 from six.moves import urllib
 
 #IMPORTANTE: nao adianta copiar link da pagina web do github pra fazer o download
-#Do arquivo .tgz, para fazer o download eh necessario pegar o arquivo
-#Pela pagina raw...A variavel DOWNLOAD_ROOT serve como referencia para obter o caminho html
-#Na frente inclua o diretorio do seu github ateh o arquivo e o nome do arquivo
-#Se isso nao for feito da erro em urlib.request.urlretrieve()
-DOWNLOAD_ROOT = "https://raw.githubusercontent.com/ageron/handson-ml/master/"
-
-#Diretorio em que sera salvo os dados na minha maquina
-HOUSING_PATH = "datasets/housing"
+#Do arquivo .tgz, para fazer o download eh necessario pegar o link raw do github
+#Inclui as variaveis necessarias para direcionar pro caminho correto para um arquivo
+#Qualquer do github, a estrutura para direcionar para um arquivo qualquer do github seria
+#LINK = os.path.join( HTTP_RAW, USER, REPOSITORY, "master/", PATH, FILE)
+USER="ageron" #"EwertonPSA"
+REPOSITORY="handson-ml" #"Practices_Machine_Learn"
+HTTP_RAW="https://raw.githubusercontent.com"
+PATH="datasets/housing" #"Book_Hands_On_ML/datasets/housing"
+FILE="/housing.tgz"
+DOWNLOAD_ROOT = os.path.join( HTTP_RAW, USER, REPOSITORY, "master/")
 #Diretorio completo do arquivo compactado
-HOUSING_URL = DOWNLOAD_ROOT + HOUSING_PATH + "/housing.tgz"
+HOUSING_URL = DOWNLOAD_ROOT + PATH + "/housing.tgz"
 
 #Funcao que realiza o download dos dados que se encontra compacto.
 #Em seguida sera realizado a extracao dos dados
 #Isso permite que diferentes machinas realizem baixem e atualizem os dados
 
-def fetch_housing_data(housing_url=HOUSING_URL, housing_path=HOUSING_PATH):
+def fetch_housing_data(housing_url=HOUSING_URL, housing_path=PATH):
     #Checa se o diretorio na minha maquina se encontra criado
     if not os.path.isdir(housing_path):
         os.makedirs(housing_path)
-    #Pegando o caminho "datasets/housing/housing.tgz"
+    #Pegando o diretorio local "datasets/housing/housing.tgz"
     tgz_path = os.path.join( housing_path, "housing.tgz")
-    print (housing_url)
+    print (HOUSING_URL)
 
     #Copia o arquivo do github pro diretorio local
     #Se o arquivo ja existir, ele atualiza pro novo e substitui? verificar..
