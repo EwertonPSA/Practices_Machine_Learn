@@ -16,9 +16,9 @@ DOWNLOAD_ROOT = os.path.join( HTTP_RAW, USER, REPOSITORY, "master/")
 #Diretorio completo do arquivo compactado
 HOUSING_URL = DOWNLOAD_ROOT + PATH + "/housing.tgz"
 
-#Funcao que realiza o download dos dados que se encontra compacto.
+#Funcao que realiza o download dos dados que se encontra compactado.
 #Em seguida sera realizado a extracao dos dados
-#Isso permite que diferentes machinas realizem baixem e atualizem os dados
+#Isso permite que diferentes maquinas realizem baixem e atualizem os dados
 
 def fetch_housing_data(housing_url=HOUSING_URL, housing_path=PATH):
     #Checa se o diretorio na minha maquina se encontra criado
