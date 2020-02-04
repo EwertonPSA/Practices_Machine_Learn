@@ -13,5 +13,4 @@ Fiz esse gráfico para ver o impacto do valor K no algorítimo de treinamento KN
 
 ### Chapter 2 – End-to-end Machine Learning project
 Nesse problema é feito uma simulação de um possivel problema "real".<br/>
-
 Pontos importantes do código: visualização dos dados .csv( .value_count(); .counts(); .head(); .info() e .describe(): IMPORTANTE, permite ver informações de valores não nulos), estrutura correta para incluir link de download de arquivo a partir do github.
