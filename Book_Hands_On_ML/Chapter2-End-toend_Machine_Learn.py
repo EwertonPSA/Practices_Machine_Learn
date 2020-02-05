@@ -107,7 +107,7 @@ print(csv.describe())
 mpl.rcParams.update(params)
 
 csv.hist(bins=50, figsize=(30, 15))
-plt.suptitle("Histogram of csv file".upper(), fontsize=20)
+plt.suptitle("Histogram of csv file".upper(), fontsize=34)
 
 save_fig("attribute_histogram_plots")
 plt.show()
