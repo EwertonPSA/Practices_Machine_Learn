@@ -3,10 +3,12 @@ import tarfile
 import pandas as pd
 'exec(%matplotlib inline)'
 import matplotlib as mpl
-mpl.rc('axes', labelsize=14)
-mpl.rc('xtick', labelsize=12)
-mpl.rc('ytick', labelsize=12)
 import matplotlib.pyplot as plt
+
+params = {'axes.titlesize':'30',
+        'xtick.labelsize':'15',
+        'ytick.labelsize':'15'}
+        
 from six.moves import urllib
 
 
@@ -64,11 +66,10 @@ IMAGES_PATH = os.path.join( PROJECT_ROOT_DIR, "Images", CHAPTER_ID)
 #Funcao para salvar imagem
 #Parametros: 
 #   fig_id = Nome da imagem
-def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=200):
+def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
     path = os.path.join(IMAGES_PATH, fig_id + "." + fig_extension)
 
     #Se nao existir o diretorio entao sera criado para jogar a imagem la
-
     if not os.path.isdir(IMAGES_PATH):
         os.makedirs(IMAGES_PATH)
     
@@ -100,8 +101,13 @@ print(csv.describe())
 #figsize=(30,15)-> 30 em x e 15 em y
 #bins=50-> significa que na plotagem os dados serao dividos em 50 partes(Na coordenada x) e incluido as barras correspondente a cada informacao
 #           Se incluir 5 por exemplo, havera 5 barras apenas com os dados preenchidos
-csv.hist(bins=50, figsize=(30,15))
-plt.suptitle("Histogram of csv file".upper())
+
+#IMPORTANTE
+#Eh incluido os parametros de texto no DataFrame
+mpl.rcParams.update(params)
+
+csv.hist(bins=50, figsize=(30, 15))
+plt.suptitle("Histogram of csv file".upper(), fontsize=20)
+
 save_fig("attribute_histogram_plots")
 plt.show()
-
