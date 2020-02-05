@@ -15,5 +15,5 @@ Fiz esse gráfico para ver o impacto do valor K no algorítimo de treinamento KN
 Nesse problema é feito uma simulação de um possivel problema "real".<br/>
 Pontos importantes do código: visualização dos dados .csv( .value_count(); .counts(); .head(); .info() e .describe(): IMPORTANTE, permite ver informações de valores não nulos), estrutura correta para incluir link de download de arquivo a partir do github.
 
-<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/end_to_end_project/attribute_histogram_plots.png" width="1250" height="600" />
+<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/end_to_end_project/attribute_histogram_plots.png" width="1700" height="600" />
 
