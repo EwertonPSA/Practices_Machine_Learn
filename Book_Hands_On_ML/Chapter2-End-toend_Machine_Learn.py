@@ -4,12 +4,14 @@ import pandas as pd
 'exec(%matplotlib inline)'
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-
+import numpy as np
+np.random.seed(42) #Gerar saidas iguais ao do livro
 params = {'axes.titlesize':'30',
         'xtick.labelsize':'15',
         'ytick.labelsize':'15'}
         
 from six.moves import urllib
+from sklearn.model_selection import train_test_split
 
 
 #################################################################################
@@ -97,17 +99,23 @@ print(csv["ocean_proximity"].value_counts())
 print("\n" + "Observando informações de max, min, quartis e outros dados da tabela".upper())
 print(csv.describe())
 
-#Plotagem de um histograma por coluna nos dados lidos do arquivo .csv
-#figsize=(30,15)-> 30 em x e 15 em y
-#bins=50-> significa que na plotagem os dados serao dividos em 50 partes(Na coordenada x) e incluido as barras correspondente a cada informacao
-#           Se incluir 5 por exemplo, havera 5 barras apenas com os dados preenchidos
-
 #IMPORTANTE
 #Eh incluido os parametros de texto no DataFrame
 mpl.rcParams.update(params)
 
+#Plotagem de um histograma por coluna nos dados lidos do arquivo .csv
+#figsize=(30,15)-> 30 em x e 15 em y
+#bins=50-> significa que na plotagem os dados serao dividos em 50 partes(Na coordenada x) e incluido as barras correspondente a cada informacao
+#           Se incluir 5 por exemplo, havera 5 barras apenas com os dados preenchidos
 csv.hist(bins=50, figsize=(30, 15))
 plt.suptitle("Histogram of csv file".upper(), fontsize=34)
 
 save_fig("attribute_histogram_plots")
+plt.close()
+
+#Particionar os dados em treinamento e teste, com 20% para teste 
+#train_test_split() fornecido pelo sklearn nos fornece essa opcao
+train_set, test_set = train_test_split(csv, test_size=0.2, random_state=42)
+print(test_set.head())
+csv["median_income"].hist(bins=50, figsize=(30,15))
 plt.show()
