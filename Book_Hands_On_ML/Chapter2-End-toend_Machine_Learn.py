@@ -118,4 +118,16 @@ plt.close()
 train_set, test_set = train_test_split(csv, test_size=0.2, random_state=42)
 print(test_set.head())
 csv["median_income"].hist(bins=50, figsize=(30,15))
+plt.close()
+
+#Vou ajustar o grafico que plotei antes em 5 sessoes
+#O ajuste sera incluido em uma nova coluna da tabela .csv
+#Que chamarah "income_cat". Os valores que estao entre as sessoes 0 e 1.5
+#Entraram na sessao de label 1, os valores que estao entre as sessoes 1.5 e 3.0
+#Entram na sessao de label 2 e assim por diante
+intervalos = [0., 1.5, 3.0, 4.5, 6., np.inf]
+labels_Intervalos = [1, 2, 3, 4, 5]
+#FUNCAO PD.CUT IMPORTANTE PRA PASSAR VALORES CONTINUOS PARA DISCRETOS 
+csv["income_cat"] = pd.cut(csv["median_income"], bins=intervalos, labels=labels_Intervalos)
+csv["income_cat"].hist()
 plt.show()
