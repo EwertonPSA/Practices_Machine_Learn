@@ -114,16 +114,18 @@ plt.suptitle("Histogram of csv file".upper(), fontsize=34)
 save_fig("attribute_histogram_plots")
 plt.close()
 
-#Particionar os dados em treinamento e teste, com 20% para teste 
-#train_test_split() fornecido pelo sklearn nos fornece essa opcao
-train_set, test_set = train_test_split(csv, test_size=0.2, random_state=42)
-print(test_set.head())
-csv["median_income"].hist(bins=50, figsize=(30,15))
-plt.close()
+#############################################################################
+#A seguir compararemos duas formas de selecionar os dados de treino e teste
+#Um nao considera a proporcao existente nos dados(train_test_split)
+#O outro considera a proporcao da renda media nos dados e depois 
+#Realiza o serteio seguindo esse criterio(StratifeShuffleSplit)
+#############################################################################
 
-#Vou ajustar o grafico que plotei antes em 5 sessoes
-#O ajuste sera incluido em uma nova coluna da tabela .csv
-#Que chamarah "income_cat". Os valores que estao entre as sessoes 0 e 1.5
+#Sera reunido as informacoes de "median_income"(renda media)
+#Em um conjunto de labels, faremos isso para depois considerar as proporcoes
+#Existente nos dados e fazer o sortei adequado para teste e treinamento
+#Os dados serao reunidos em uma nova coluna da tabela .csv
+#Que chama "income_cat". Os valores que estao entre as sessoes 0 e 1.5
 #Entraram na sessao de label 1, os valores que estao entre as sessoes 1.5 e 3.0
 #Entram na sessao de label 2 e assim por diante
 intervalos = [0., 1.5, 3.0, 4.5, 6., np.inf]
@@ -131,17 +133,35 @@ labels_Intervalos = [1, 2, 3, 4, 5]
 #FUNCAO PD.CUT IMPORTANTE PRA PASSAR VALORES CONTINUOS PARA DISCRETOS 
 csv["income_cat"] = pd.cut(csv["median_income"], bins=intervalos, labels=labels_Intervalos)
 
+#Particionar os dados em treinamento e teste, com 20% para teste 
+#IMPORTANTE: train_test_split() separa os dados nao considerando
+#            A proporcao existente nos dados, podendo causar um vies
+train_set, test_set = train_test_split(csv, test_size=0.2, random_state=42)
+
 #Validacao cruzada com embaralhamento
-split = StratifiedShuffleSplit(nsplits=1, test_size=0.2, random_state=42)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 
 #split.split gera indices para treinamento e teste
 #csv=Conjunto de dados a serem estratificados
 #csv["income_cat"]=Usado para analisar a proporcao dos dados e realizar a estratificacao adequada com a proporcao
 #O 'for' serve para retirar os n sorteios(que nesse caso seria apenas 1)
+#Em strat_train_set e strat_test_set tera (DataFrames) um grupo de informacoes obtidos pelos index
+#Para realizar o treinamento e teste. 
 for train_index, test_index in split.split( csv, csv["income_cat"]):
     strat_train_set = csv.loc[train_index]
     strat_test_set = csv.loc[test_index]
 
-csv["income_cat"].hist()
-plt.show()
+#Obtendo as proporcoes de "income_cat" a partir dos data( DataFrame )
+def income_cat_proportions(data):
+    return data["income_cat"].value_counts() / len(data)
 
+#Criando um DataFrame
+compare_props = pd.DataFrame({
+    "Overall": income_cat_proportions(csv),
+    "Stratified": income_cat_proportions(strat_test_set),
+    "Random": income_cat_proportions(test_set), }).sort_index()
+compare_props["Rand. %error"] = 100*compare_props["Random"] / compare_props["Overall"] - 100
+compare_props["Strat. %error"] = 100*compare_props["Stratified"] / compare_props["Overall"] - 100
+compare_props.plot()
+plt.show()
+print(compare_props)
