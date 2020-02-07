@@ -12,6 +12,7 @@ params = {'axes.titlesize':'30',
         
 from six.moves import urllib
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedShuffleSplit
 
 
 #################################################################################
@@ -129,5 +130,18 @@ intervalos = [0., 1.5, 3.0, 4.5, 6., np.inf]
 labels_Intervalos = [1, 2, 3, 4, 5]
 #FUNCAO PD.CUT IMPORTANTE PRA PASSAR VALORES CONTINUOS PARA DISCRETOS 
 csv["income_cat"] = pd.cut(csv["median_income"], bins=intervalos, labels=labels_Intervalos)
+
+#Validacao cruzada com embaralhamento
+split = StratifiedShuffleSplit(nsplits=1, test_size=0.2, random_state=42)
+
+#split.split gera indices para treinamento e teste
+#csv=Conjunto de dados a serem estratificados
+#csv["income_cat"]=Usado para analisar a proporcao dos dados e realizar a estratificacao adequada com a proporcao
+#O 'for' serve para retirar os n sorteios(que nesse caso seria apenas 1)
+for train_index, test_index in split.split( csv, csv["income_cat"]):
+    strat_train_set = csv.loc[train_index]
+    strat_test_set = csv.loc[test_index]
+
 csv["income_cat"].hist()
 plt.show()
+

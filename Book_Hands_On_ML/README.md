@@ -13,7 +13,7 @@ Fiz esse gráfico para ver o impacto do valor K no algorítimo de treinamento KN
 
 ### Chapter 2 – End-to-end Machine Learning project
 Realizamos a simulação de um possivel problema "real".<br/>
-Pontos importantes do código: visualização dos dados .csv( .value_count(); .counts(); .head(); .info() e .describe(): IMPORTANTE, permite ver informações de valores não nulos), estrutura correta para incluir link de download de arquivo a partir do github e atualização de tamanho do titulo nos subplot.
+Pontos importantes do código: visualização dos dados .csv( .value_count(); .counts(); .head(); .info() e .describe(): IMPORTANTE, permite ver informações de valores não nulos), estrutura correta para incluir link de download de arquivo a partir do github, atualização de tamanho do titulo nos subplot, agrupar informacoes ou passar informacoes continuas para discretas (pandas.cut()), .
 
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Images/end_to_end_project/attribute_histogram_plots.png" width="1700" height="400" />
 
