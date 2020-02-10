@@ -5,6 +5,7 @@ import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.image as mpimg #Carregar .png
 np.random.seed(42) #Gerar saidas iguais ao do livro
 params = {'axes.titlesize':'30',
         'xtick.labelsize':'15',
@@ -13,7 +14,8 @@ params = {'axes.titlesize':'30',
 from six.moves import urllib
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
-from pandas.plotting import table
+from pandas.plotting import table #Colocar a tabela na figura stratified_versus_random.png
+
 
 
 #################################################################################
@@ -176,17 +178,42 @@ for set in (strat_train_set, strat_test_set):
     #axis=1->Remover o "income_cat" que se encontra na coluna da tabela
     set.drop(["income_cat"], axis=1, inplace=True)
 
+
 csv = strat_train_set.copy()
+
+#Carrega a imagem para incluir como tela de fundo na plotagem dos dados
+california_img=mpimg.imread(PROJECT_ROOT_DIR + '/Images/end_to_end_project/california.png')
+
 #Visualizacao das informacoes em area
 #alpha=0.4-> auxilia na visualizacao da densidade das informacoes
 #s->usado para determinar o tamanho do circulo a partir de csv["populaion"]
 #c->usado para definir cores(preco) a partir das informacoes em "median_house_value" em csv que sera definido em cmap
-#
-csv.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
+ax = csv.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
         s=csv["population"]/100, label="population", figsize=(10,7),
-        c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True,
-        sharex=False)
-plt.legend()
-save_fig("housing_prices_scatterplot")
-plt.show()
+        c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=False,
+        sharex=False)#Colorbar da tabela foi desativado
+
+#extent->onde a imagem vai ser incluida seguindo as coordenadas dos dados
+#        (-124.55: coordenada x lateral esquerda, -113.90: coordenada x lateral direita)
+
+plt.imshow(california_img, extent=[-124.55, -113.90, 32.45, 42.05], alpha=0.5, 
+        cmap=plt.get_cmap("jet"))
+plt.ylabel("Latitude", fontsize=14) #Mudando o tamanho das labels
+plt.xlabel("Longitude", fontsize=14)
+
+#Incluindo na barra de cores os preços, pra isso pegaremos os precos minimos e maximos
+#e dividiremos os precos em 11 partes, em seguida jogaremos os valores nas legendas em y da barra
+#Em seguida
+prices = csv["median_house_value"]
+tick_values = np.linspace(prices.min(), prices.max(), 11)
+#Criando um colorbar com nossas labels
+cbar = plt.colorbar()
+#imprimi no formado "$%dk", o argumento eh (round(v/1000), aparentemente o % serve
+#Como simbolo para definir os parametros
+cbar.ax.set_yticklabels(["$%dk"%(round(v/1000)) for v in tick_values], fontsize=14)
+cbar.set_label('Median House Value', fontsize=16)
+
+plt.legend(fontsize=16)
+save_fig("california_housing_prices_scatterplot")
+plt.close()
 
