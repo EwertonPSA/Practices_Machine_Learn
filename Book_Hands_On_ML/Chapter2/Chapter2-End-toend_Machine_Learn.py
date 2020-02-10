@@ -176,4 +176,17 @@ for set in (strat_train_set, strat_test_set):
     #axis=1->Remover o "income_cat" que se encontra na coluna da tabela
     set.drop(["income_cat"], axis=1, inplace=True)
 
+csv = strat_train_set.copy()
+#Visualizacao das informacoes em area
+#alpha=0.4-> auxilia na visualizacao da densidade das informacoes
+#s->usado para determinar o tamanho do circulo a partir de csv["populaion"]
+#c->usado para definir cores(preco) a partir das informacoes em "median_house_value" em csv que sera definido em cmap
+#
+csv.plot(kind="scatter", x="longitude", y="latitude", alpha=0.4,
+        s=csv["population"]/100, label="population", figsize=(10,7),
+        c="median_house_value", cmap=plt.get_cmap("jet"), colorbar=True,
+        sharex=False)
+plt.legend()
+save_fig("housing_prices_scatterplot")
+plt.show()
 
