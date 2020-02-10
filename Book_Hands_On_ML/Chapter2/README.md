@@ -16,4 +16,4 @@ Medimos as proporções da categoria de renda no conjunto de testes e no conjunt
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/stratified_versus_random.png" width="700" height="500" />
 
 ### Parte 3
-Pegamos os dados e incluimos em imagem com recursos visuais para facilitar a visualização dos dados. Por exemplo, os circulos possuem raios que estabelecem a densidde em cada localização e também possuem cores demonstrando os preços.
+A partir dos dados geramos imagens com recursos visuais para facilitar a visualização dos dados. Por exemplo, os circulos possuem raios que estabelecem a densidde em cada localização e também possuem cores demonstrando os preços.
