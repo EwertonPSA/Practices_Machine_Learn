@@ -17,3 +17,5 @@ Medimos as proporções da categoria de renda no conjunto de testes e no conjunt
 
 ### Parte 3
 A partir dos dados geramos imagens com recursos visuais para facilitar a visualização dos dados. Por exemplo, os circulos possuem raios que estabelecem a densidde em cada localização e também possuem cores demonstrando os preços.
+
+<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/housing_prices_scatterplot.png" width="600" height="200" />
