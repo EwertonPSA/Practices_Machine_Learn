@@ -13,6 +13,7 @@ params = {'axes.titlesize':'30',
 from six.moves import urllib
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
+from pandas.plotting import table
 
 
 #################################################################################
@@ -162,6 +163,13 @@ compare_props = pd.DataFrame({
     "Random": income_cat_proportions(test_set), }).sort_index()
 compare_props["Rand. %error"] = 100*compare_props["Random"] / compare_props["Overall"] - 100
 compare_props["Strat. %error"] = 100*compare_props["Stratified"] / compare_props["Overall"] - 100
-compare_props.plot()
-plt.show()
-print(compare_props)
+fig, ax = plt.subplots(1,1)
+table(ax, np.round(compare_props, 5), loc='upper center', colWidths=[0.15, 0.15, 0.15, 0.15, 0.15])
+compare_props.plot(ax=ax, ylim=(-10, 10))
+#plt.tight_layout()
+ax.legend(loc='lower left')
+plt.suptitle("Error stratified versus purely random sampling".upper(), fontsize=14)
+#plt.show()
+save_fig("stratified_versus_random")
+plt.close()
+
