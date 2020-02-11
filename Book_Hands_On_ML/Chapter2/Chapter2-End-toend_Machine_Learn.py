@@ -15,6 +15,7 @@ from six.moves import urllib
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
 from pandas.plotting import table #Colocar a tabela na figura stratified_versus_random.png
+from pandas.plotting import scatter_matrix #Visualizar as relacoes entre os dados
 
 
 
@@ -71,14 +72,20 @@ IMAGES_PATH = os.path.join( PROJECT_ROOT_DIR, "Images", CHAPTER_ID)
 
 #Funcao para salvar imagem
 #Parametros: 
+#   verify = Caso seja true e o arquivo ja existir entao nao eh sobreescrito o arquivo
+#            Caso seja false o arquivo eh criado (Ou sobreescrito caso ja exista)
 #   fig_id = Nome da imagem
-def save_fig(fig_id, tight_layout=True, fig_extension="png", resolution=300):
+def save_fig(verify, fig_id, tight_layout=True, fig_extension="png", resolution=300):
     path = os.path.join(IMAGES_PATH, fig_id + "." + fig_extension)
 
     #Se nao existir o diretorio entao sera criado para jogar a imagem la
     if not os.path.isdir(IMAGES_PATH):
         os.makedirs(IMAGES_PATH)
-    
+
+    if (os.path.isfile(path)) & (verify == True):
+        print ("File " + fig_id + "." + fig_extension + " has already been created")
+        return
+
     print("Saving figure", fig_id)
 
     #Retirei esse ajuste pois a imagem estava ficando feia
@@ -114,7 +121,7 @@ mpl.rcParams.update(params)
 csv.hist(bins=50, figsize=(30, 15))
 plt.suptitle("Histogram of csv file".upper(), fontsize=34)
 
-save_fig("attribute_histogram_plots")
+save_fig( True, "attribute_histogram_plots")
 plt.close()
 
 #############################################################################
@@ -170,7 +177,7 @@ table(ax, np.round(compare_props, 5), loc='upper center', colWidths=[0.15, 0.15,
 compare_props.plot(ax=ax, ylim=(-10, 10))
 ax.legend(loc='lower left')
 plt.suptitle("Error stratified versus purely random sampling".upper(), fontsize=14)
-save_fig("stratified_versus_random")
+save_fig( True, "stratified_versus_random")
 plt.close()
 
 #Removendo as proporcoes 
@@ -214,6 +221,29 @@ cbar.ax.set_yticklabels(["$%dk"%(round(v/1000)) for v in tick_values], fontsize=
 cbar.set_label('Median House Value', fontsize=16)
 
 plt.legend(fontsize=16)
-save_fig("california_housing_prices_scatterplot")
+save_fig( True, "california_housing_prices_scatterplot")
 plt.close()
 
+
+
+
+# Escolhendo quais atributos desejo relacionar para avaliar as relacoes entre os dados
+attributes = ["median_house_value", "median_income", "total_rooms", "housing_median_age"]
+scatter_matrix(csv[attributes], figsize=(12,8))
+save_fig( False, "scatter_matrix_plot")
+plt.close()
+csv.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1)
+plt.axis([0, 16, 0, 550000])#Definindo intervalo que sera plotado
+save_fig( False, "income_vs_house_value_scatterplot")
+plt.close()
+
+#Divide cada valor de um atributo por outro atributo de mesmo index
+csv["rooms_per_household"] = csv["total_rooms"]/csv["households"]
+csv["bedrooms_per_room"] = csv["total_bedrooms"]/csv["total_rooms"]
+csv["population_per_household"] = csv["population"]/csv["households"]
+
+#Avaliando as relacoes com os dados
+corr_matrix = csv.corr()
+print("\n" + "Correlacao entre \"median_house_value\" e outros atributos".upper())
+print( corr_matrix["median_house_value"].sort_values(ascending=False))
+print()
