@@ -233,6 +233,7 @@ scatter_matrix(csv[attributes], figsize=(12,8))
 save_fig( False, "scatter_matrix_plot")
 plt.close()
 csv.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1, figsize=(20,12))
+mpl.rcParams.update(params)
 plt.axis([0, 16, 0, 550000])#Definindo intervalo que sera plotado
 save_fig( False, "income_vs_house_value_scatterplot")
 plt.show()
