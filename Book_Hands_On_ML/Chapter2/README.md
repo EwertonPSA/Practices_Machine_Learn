@@ -19,3 +19,10 @@ Medimos as proporções da categoria de renda no conjunto de testes e no conjunt
 A partir dos dados geramos imagens com recursos visuais para facilitar a visualização dos dados. Por exemplo, os circulos possuem raios que estabelecem a densidde em cada localização e também possuem cores demonstrando os preços.
 
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/california_housing_prices_scatterplot.png" width="600" height="400" />
+
+### Parte 4
+Analisando relações entre os dados.
+
+<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/scatter_matrix_plot.png" width="600" height="400" />
+
+<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/income_vs_house_value_scatterplot.png" width="600" height="400" />
