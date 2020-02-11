@@ -232,10 +232,10 @@ attributes = ["median_house_value", "median_income", "total_rooms", "housing_med
 scatter_matrix(csv[attributes], figsize=(12,8))
 save_fig( False, "scatter_matrix_plot")
 plt.close()
-csv.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1)
+csv.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1, figsize=(30,15))
 plt.axis([0, 16, 0, 550000])#Definindo intervalo que sera plotado
 save_fig( False, "income_vs_house_value_scatterplot")
-plt.close()
+plt.show()
 
 #Divide cada valor de um atributo por outro atributo de mesmo index
 csv["rooms_per_household"] = csv["total_rooms"]/csv["households"]
