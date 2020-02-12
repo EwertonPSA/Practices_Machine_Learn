@@ -230,15 +230,15 @@ plt.close()
 # Escolhendo quais atributos desejo relacionar para avaliar as relacoes entre os dados
 attributes = ["median_house_value", "median_income", "total_rooms", "housing_median_age"]
 scatter_matrix(csv[attributes], figsize=(12,8))
-save_fig( False, "scatter_matrix_plot")
+save_fig( True, "scatter_matrix_plot")
 plt.close()
 csv.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1, figsize=(20,12))
 mpl.rcParams.update(params)
 plt.axis([0, 16, 0, 550000])#Definindo intervalo que sera plotado
 plt.ylabel("median_house_value", fontsize=25)
 plt.xlabel("median_income", fontsize=25)
-save_fig( False, "income_vs_house_value_scatterplot")
-plt.show()
+save_fig( True, "income_vs_house_value_scatterplot")
+plt.close()
 
 #Divide cada valor de um atributo por outro atributo de mesmo index
 csv["rooms_per_household"] = csv["total_rooms"]/csv["households"]
@@ -250,3 +250,12 @@ corr_matrix = csv.corr()
 print("\n" + "Correlacao entre \"median_house_value\" e outros atributos".upper())
 print( corr_matrix["median_house_value"].sort_values(ascending=False))
 print()
+
+print(csv["total_bedrooms"].value_counts())
+
+#Vamos preparar os dados para aplicar algoritimos de treinamento
+#A seguir vamos separar os rotulos dos preditores
+csv = strat_train_set.drop("median_house_value", axis=1)#Retirando os rotulos dos conjuntos de treinamento
+csv_labels = strat_train_set["median_house_value"].copy()
+
+
