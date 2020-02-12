@@ -235,6 +235,8 @@ plt.close()
 csv.plot(kind="scatter", x="median_income", y="median_house_value", alpha=0.1, figsize=(20,12))
 mpl.rcParams.update(params)
 plt.axis([0, 16, 0, 550000])#Definindo intervalo que sera plotado
+plt.ylabel("median_house_value", fontsize=25)
+plt.xlabel("median_income", fontsize=25)
 save_fig( False, "income_vs_house_value_scatterplot")
 plt.show()
 
