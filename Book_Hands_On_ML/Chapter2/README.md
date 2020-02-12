@@ -25,4 +25,4 @@ Analisando relações entre os dados.
 
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/scatter_matrix_plot.png" width="600" height="400" />
 
-<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/income_vs_house_value_scatterplot.png" width="600" height="400" />
+<img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/income_vs_house_value_scatterplot.png" width="600" height="400" /> 
