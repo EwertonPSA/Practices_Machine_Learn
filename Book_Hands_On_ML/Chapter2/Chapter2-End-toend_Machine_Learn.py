@@ -121,7 +121,7 @@ mpl.rcParams.update(params)
 csv.hist(bins=50, figsize=(30, 15))
 plt.suptitle("Histogram of csv file".upper(), fontsize=34)
 
-save_fig( True, "attribute_histogram_plots")
+save_fig( False, "attribute_histogram_plots")
 plt.close()
 
 #############################################################################
