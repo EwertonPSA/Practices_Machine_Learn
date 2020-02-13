@@ -121,7 +121,7 @@ mpl.rcParams.update(params)
 csv.hist(bins=50, figsize=(30, 15))
 plt.suptitle("Histogram of csv file".upper(), fontsize=34)
 
-save_fig( False, "attribute_histogram_plots")
+save_fig( True, "attribute_histogram_plots")
 plt.close()
 
 #############################################################################
@@ -256,6 +256,18 @@ print(csv["total_bedrooms"].value_counts())
 #Vamos preparar os dados para aplicar algoritimos de treinamento
 #A seguir vamos separar os rotulos dos preditores
 csv = strat_train_set.drop("median_house_value", axis=1)#Retirando os rotulos dos conjuntos de treinamento
-csv_labels = strat_train_set["median_house_value"].copy()
+csv_labels = strat_train_set["median_house_value"].copy()#Obtendo as labels
 
+#visualizar se existe dados nulos
+#csv.isnull() -> Verifica os valores nulos e retorna um dataframe
+#csv.isnull().any() -> Faz reducao na linha pra identificar quais colunas sao considerados nulos
+#null_columns -> pega as colunas que sao tem algum index nulo
+null_columns = csv.columns[csv.isnull().any()]
+print('\n' + 'Informa quantos nulos tem no csv'.upper())
+print(csv[null_columns].isnull().sum())#Conta os nulos das colunas que possuem nulos
 
+#csv.isnull().any(axis=1)->Reducao considerando as colunas, retornando booleanos dos index que contem nulos
+print(csv[csv.isnull().any(axis=1)][null_columns].head())
+#median = csv["total_bedrooms"].median()
+#csv["total_bedroom"].
+#imputer = Imputer(strategy="median")
