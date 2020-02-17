@@ -268,6 +268,19 @@ print(csv[null_columns].isnull().sum())#Conta os nulos das colunas que possuem n
 
 #csv.isnull().any(axis=1)->Reducao considerando as colunas, retornando booleanos dos index que contem nulos
 print(csv[csv.isnull().any(axis=1)][null_columns].head())
-#median = csv["total_bedrooms"].median()
-#csv["total_bedroom"].
-#imputer = Imputer(strategy="median")
+
+#Vamos obter as medianas dos atributos da tabela csv por meio do Imputer
+#As medianas serao usadas para substituir os valores nulos do csv
+#Tres formas de substituir valores nulos(pg 82):
+#   -Retirar a coluna
+#   -Retirar os index com nulos
+#   -Substituir pela mediana
+imputer = Imputer(strategy="median")
+
+#ATENCAO: Soh pode ser obtido a mediana para valores numericos, a nossa tabela csv
+#         Contem em "ocean_proximity" string, entao retiraremos ela pra jogar em uma copia
+csv_num = csv.drop("ocean_proximity", axis=1)
+imputer.fit(csv_num)#Obtem as medianas, que se encontram em imputer.statistics_
+X = imputer.transform(csv_num)#X eh uma matriz simples contem a tabela csv_num com as medianas no lugar dos nulos
+csv_tr = pd.DataFrame(X, columns=csv_num.columns)#Repassando a matriz X como um DataFrame contendo as labels de antes
+
