@@ -17,6 +17,19 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from pandas.plotting import table #Colocar a tabela na figura stratified_versus_random.png
 from pandas.plotting import scatter_matrix #Visualizar as relacoes entre os dados
 
+# Computar a mediana dos atributos
+try:
+    from sklearn.impute import SimpleImputer #Scikit-Learn 0.20+
+except ImportError:
+    from sklearn.preprocessing import Imputer as SimpleImputer
+
+#Usado para transformar as labels do atributo 'ocean_proximity' em valores discretos
+try:
+    from sklearn.preprocessing import OrdinalEncoder
+    from sklearn.preprocessing import OneHotEncoder
+except ImportError:
+    from future_encoders import OneHotEncoder # Scikit-Learn <0.20
+
 
 
 #################################################################################
@@ -269,18 +282,36 @@ print(csv[null_columns].isnull().sum())#Conta os nulos das colunas que possuem n
 #csv.isnull().any(axis=1)->Reducao considerando as colunas, retornando booleanos dos index que contem nulos
 print(csv[csv.isnull().any(axis=1)][null_columns].head())
 
+
+
 #Vamos obter as medianas dos atributos da tabela csv por meio do Imputer
 #As medianas serao usadas para substituir os valores nulos do csv
 #Tres formas de substituir valores nulos(pg 82):
 #   -Retirar a coluna
 #   -Retirar os index com nulos
 #   -Substituir pela mediana
-imputer = Imputer(strategy="median")
+imputer = SimpleImputer(strategy="median")
 
 #ATENCAO: Soh pode ser obtido a mediana para valores numericos, a nossa tabela csv
 #         Contem em "ocean_proximity" string, entao retiraremos ela pra jogar em uma copia
 csv_num = csv.drop("ocean_proximity", axis=1)
 imputer.fit(csv_num)#Obtem as medianas, que se encontram em imputer.statistics_
 X = imputer.transform(csv_num)#X eh uma matriz simples contem a tabela csv_num com as medianas no lugar dos nulos
-csv_tr = pd.DataFrame(X, columns=csv_num.columns)#Repassando a matriz X como um DataFrame contendo as labels de antes
+
+#Repassando a matriz X como um DataFrame contendo as labels de antes
+#O csv_tr tera como indice os mesmo do csv(que serao obtidos seguindo a sequencia do csv em um array)
+csv_tr = pd.DataFrame(X, columns=csv_num.columns, index=csv.index)
+
+#Pegando DataFrame que contem apenas os valores nulos
+sample_incomplete_rows = csv[csv.isnull().any(axis=1)]
+#Agora verifico como esses valores estao apos inclusao da mediana
+#O Dataframe.loc me permite acessar um conjunto de linhas ou colunas
+
+print('Visualizando os valores nulos contidos em \"total_bethroon\" e a inclusao da mediana neles')
+print(csv.loc[sample_incomplete_rows.index.values].head())
+print()
+print(csv_tr.loc[sample_incomplete_rows.index.values].head())
+
+#Transformando os atributos de 'ocean_proximity', que esta representado por texto, em valores discretos
+#
 
