@@ -21,7 +21,9 @@ A partir dos dados geramos imagens com recursos visuais para facilitar a visuali
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/california_housing_prices_scatterplot.png" width="600" height="400" />
 
 ### Parte 4
-Analisando relações entre os dados.No segundo gráfico é possivel ver uma linha na parte superior, sendo um problema para o algoritimo de treinamento.
+Analisando relações entre os dados. 
+
+No segundo gráfico é possivel ver uma linha na parte superior, podendo ser um problema para o algoritimo de treinamento. Analisando de forma geral o gráfico podemos ver uma relação próxima do linear entre a renda média e o preço médio das casas. A reta não apresenta essa característica e o algoritimo pode vir a aprender e reproduzir esse comportamento, sendo possivelmente um problema.
 
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/scatter_matrix_plot.png" width="600" height="400" />
 
