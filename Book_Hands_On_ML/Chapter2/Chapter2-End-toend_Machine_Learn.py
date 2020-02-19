@@ -313,5 +313,22 @@ print()
 print(csv_tr.loc[sample_incomplete_rows.index.values].head())
 
 #Transformando os atributos de 'ocean_proximity', que esta representado por texto, em valores discretos
-#
+csv_cat = csv[['ocean_proximity']] #Pegando os textos contidos em 'ocean_proximity'
+ordinal_encoder = OrdinalEncoder()
+csv_cat_encoded = ordinal_encoder.fit_transform(csv_cat)
+
+print('\n', "Transformando a distancia dos distrituos ao oceano em valores discretos")
+print(ordinal_encoder.categories_)
+
+print('\n', "Visualizacao dos primeiros distritos categorizado por distancia de oceano")
+print(csv_cat_encoded[:10])
+
+cat_encoder = OneHotEncoder()
+#Com os textos contidos em 'ocean_proximity' eh montado o oneHotEncode
+csv_cat_1hot = cat_encoder.fit_transform(csv_cat)
+
+print("\n")#TERMINAR AQUI DE INCLUIR OS NOMES DAS COLUNAS
+print("\n", "montado o oneHotEncode, nas linhas temos instancias e nas colunas as labels dos oceanos")
+print(csv_cat_1hot.toarray())
+
 
