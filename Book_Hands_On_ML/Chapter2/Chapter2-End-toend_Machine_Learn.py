@@ -327,8 +327,9 @@ cat_encoder = OneHotEncoder()
 #Com os textos contidos em 'ocean_proximity' eh montado o oneHotEncode
 csv_cat_1hot = cat_encoder.fit_transform(csv_cat)
 
-print("\n")#TERMINAR AQUI DE INCLUIR OS NOMES DAS COLUNAS
+print("\n", "colunas:", ordinal_encoder.categories_)#TERMINAR AQUI DE INCLUIR OS NOMES DAS COLUNAS
 print("\n", "montado o oneHotEncode, nas linhas temos instancias e nas colunas as labels dos oceanos")
 print(csv_cat_1hot.toarray())
+
 
 
