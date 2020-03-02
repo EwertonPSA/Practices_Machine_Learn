@@ -64,7 +64,7 @@ def fetch_housing_data(housing_url=HOUSING_URL, housing_path=PATH):
     print (HOUSING_URL)
 
     #Copia o arquivo do github pro diretorio local
-    #Se o arquivo ja existir, ele atualiza pro novo e substitui? verificar..
+    #Se o arquivo ja existir ou existir uma copia em cache o objeto nao eh copiado
     urllib.request.urlretrieve( housing_url, tgz_path)
 
     #Extrair arquivo compactado
@@ -274,13 +274,14 @@ csv_labels = strat_train_set["median_house_value"].copy()#Obtendo as labels
 #visualizar se existe dados nulos
 #csv.isnull() -> Verifica os valores nulos e retorna um dataframe
 #csv.isnull().any() -> Faz reducao na linha pra identificar quais colunas sao considerados nulos
-#null_columns -> pega as colunas que sao tem algum index nulo
+#null_columns -> pega as colunas que tem algum index nulo
 null_columns = csv.columns[csv.isnull().any()]
 print('\n' + 'Informa quantos nulos tem no csv'.upper())
 print(csv[null_columns].isnull().sum())#Conta os nulos das colunas que possuem nulos
 
 #csv.isnull().any(axis=1)->Reducao considerando as colunas, retornando booleanos dos index que contem nulos
-print(csv[csv.isnull().any(axis=1)][null_columns].head())
+
+print('\n', 'Mostrando os index que possuem nulos'.upper(), '\n',  csv[csv.isnull().any(axis=1)][null_columns].head(), '\n')
 
 
 
