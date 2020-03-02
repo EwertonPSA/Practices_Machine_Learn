@@ -12,6 +12,7 @@ Visualização dos dados
 ### Parte 2
 
 Medimos as proporções da categoria de renda no conjunto de testes e no conjunto ddos dados para avaliar as proporções. Comparamos o conjunto de testes gerados por amostragem estratificada e vemos que ela tem proporções de categoria de renda quase idênticas às do conjunto de dados completo(conjunto de dados usado), enquanto o conjunto de testes gerado usando amostragem puramente aleatória é bastante distorcido.
+
 Obs codigo: pd.cut (passar valores continuos para discretos ou reunir dados em labels);
 
 <img src="https://raw.githubusercontent.com/EwertonPSA/Practices_Machine_Learn/master/Book_Hands_On_ML/Chapter2/Images/end_to_end_project/stratified_versus_random.png" width="600" height="400" />
